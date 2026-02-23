@@ -1,19 +1,31 @@
 import java.util.Scanner;
+
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
-        System.out.print("Is it a Palindrome? : ");
+
+        System.out.print("Input: ");
         String s = input.nextLine();
-        String cleanedString = s.toLowerCase();
-        int length = s.length();
-        String rev_s = "";
-        for(int i=length-1; i>=0; i--) {
-            rev_s = rev_s + s.charAt(i);
-            if (s.equals(rev_s))
-                System.out.println("String is palindrome");
-            else
-                System.out.println("String is not palindrome");
+
+        String cleanedStr = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        char[] arr = cleanedStr.toCharArray();
+
+        int start = 0;
+        int end = arr.length - 1;
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (arr[start] != arr[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
+
+        System.out.println("Is it a Palindrome?: " + isPalindrome);
+        input.close();
     }
 }
-
