@@ -2,30 +2,41 @@ import java.util.Scanner;
 
 
 public class PalindromeCheckerApp {
-    static boolean check(String s, int start, int end){
-        if(s.charAt(start) == ' '){
-            return check(s, start + 1, end);
-        }
-        if (s.charAt(end) == ' ') {
-            return check(s, start, end - 1);
-        }
-        if(start>=end){
-            return true;
-        }
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
-        }
 
-        return check(s, start+1, end-1);
-    }
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-        System.out.print("Input: ");
+        System.out.print("Input : ");
         String input = sc.nextLine();
-        input = input.toLowerCase();
-        boolean result = check(input,0,input.length()-1);
-        System.out.println("Is Palindrome? :"+result);
+
+        PalindromeService service = new PalindromeService();
+        boolean result = service.checkPalindrome(input);
+
+        System.out.println("Is Palindrome? : " + result);
+
         sc.close();
+    }
+}
+
+
+
+class PalindromeService {
+    boolean checkPalindrome(String input) {
+
+        input = input.toLowerCase().replace(" ", "");
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
     }
 }
